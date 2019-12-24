@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ifood_flutter/containers/home.dart';
 import 'package:ifood_flutter/core/model/main.dart';
+import 'package:ifood_flutter/providers/bottomNavigationBar.provider.dart';
+import 'package:ifood_flutter/providers/counter.provider.dart';
+import 'package:provider/provider.dart';
 
 final List<CardImageItem> banners = [
   CardImageItem(image: 'assets/images/restaurantes-0.png', text: 'Confira sua entrega grátis na sacola'),
@@ -27,5 +30,11 @@ final List<BottomNavigatorItem> menus = [
 
 void main() {
   SystemChrome.setEnabledSystemUIOverlays([]);
-  runApp(Home(menus: menus, categories: categories, banners: banners));
+  runApp(MultiProvider(
+      providers: [
+      ChangeNotifierProvider(create: (_) => Counter()),
+      ChangeNotifierProvider(create: (_) => BottomNavigationBarProvider()),
+      ],
+    child: Home(menus: menus, categories: categories, banners: banners)
+    ));
 }
