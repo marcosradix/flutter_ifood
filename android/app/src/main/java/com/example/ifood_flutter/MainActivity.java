@@ -1,4 +1,4 @@
-package com.example.ifood_flutter;
+package br.com.workmade.ifish;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "LaunchImage.png",
+      "filename" : "Captura de Tela 2019-12-25 às 12.19.16.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "LaunchImage@2x.png",
+      "filename" : "Captura de Tela 2019-12-25 às 12.19.16-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "LaunchImage@3x.png",
+      "filename" : "Captura de Tela 2019-12-25 às 12.19.16-2.png",
       "scale" : "3x"
     }
   ],

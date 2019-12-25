@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ifood_flutter/containers/widgets/main.dart';
 import 'package:ifood_flutter/core/model/main.dart';
+import 'package:ifood_flutter/core/scrrens/busca.page.dart';
 import 'package:ifood_flutter/core/scrrens/pedidos.page.dart';
+import 'package:ifood_flutter/core/scrrens/perfil.page.dart';
 import 'package:ifood_flutter/providers/bottomNavigationBar.provider.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +24,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   GlobalKey _bottomNavigationKey = GlobalKey();
   final PedidosPage _pedidosPage = PedidosPage();
+  final PerfilPage _perfilPage = PerfilPage();
+  final BuscaPage _buscaPage = BuscaPage();
 
   List<BottomNavigationBarItem> _buildBottomIcon() => widget.menus
       .map((menu) => BottomNavigationBarItem(
@@ -34,10 +38,14 @@ class _HomeState extends State<Home> {
  var provider = Provider.of<BottomNavigationBarProvider>(context);
     Widget _paginaSelecionada(int page) {
       switch (page) {
-        case 2:
-          return _pedidosPage;
         case 0:
         return homePage();
+        case 1:
+        return _buscaPage;
+        case 2:
+          return _pedidosPage;
+        case 3:
+          return _perfilPage;
         default:
           return Center(
             child: Text("$page"),
