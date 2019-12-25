@@ -453,7 +453,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.workmade.IFish;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.workmade.ifish;
 				PRODUCT_NAME = Runner;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -477,7 +477,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.workmade.IFish;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.workmade.ifish;
 				PRODUCT_NAME = Runner;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
