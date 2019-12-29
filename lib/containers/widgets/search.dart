@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ifood_flutter/providers/bottomNavigationBar.provider.dart';
+import 'package:provider/provider.dart';
 
 class Search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+ var provider = Provider.of<BottomNavigationBarProvider>(context);
+
     return Container(
       color: Colors.white,
       child: Padding(
@@ -15,15 +19,23 @@ class Search extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                   color: Colors.grey.shade100,
                 ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Prato ou restaurante',
-                    border: InputBorder.none,
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.red,
+                child: FocusScope(
+                     child: Focus(
+                      onFocusChange: (focus)  {
+                        print(provider.pesquisaModel.toString());
+                        //provider.currentIndex = 1;
+                        },
+                      child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Local ou iguaria',
+                      border: InputBorder.none,
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Colors.red,
+                      ),
                     ),
                   ),
+                                  ),
                 ),
               ),
             ),

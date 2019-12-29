@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+
 import 'package:ifood_flutter/containers/widgets/main.dart';
 import 'package:ifood_flutter/core/model/main.dart';
 import 'package:ifood_flutter/core/scrrens/busca.page.dart';
@@ -27,6 +29,7 @@ class _HomeState extends State<Home> {
   final PerfilPage _perfilPage = PerfilPage();
   final BuscaPage _buscaPage = BuscaPage();
 
+
   List<BottomNavigationBarItem> _buildBottomIcon() => widget.menus
       .map((menu) => BottomNavigationBarItem(
             icon: Icon(menu.icon, color: Colors.black),
@@ -36,6 +39,7 @@ class _HomeState extends State<Home> {
 
   Widget build(context) {
  var provider = Provider.of<BottomNavigationBarProvider>(context);
+
     Widget _paginaSelecionada(int page) {
       switch (page) {
         case 0:
@@ -52,17 +56,17 @@ class _HomeState extends State<Home> {
           );
       }
     }
-
+ 
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.grey),
-      title: 'Peskado',
+      theme: ThemeData(primarySwatch: Colors.blue,),
+      title: 'IFISH',
       home: Scaffold(
-        backgroundColor: Colors.grey.shade100,
+        backgroundColor: Colors.blueAccent,
         body: _paginaSelecionada(provider.currentIndex),
         bottomNavigationBar: BottomNavigationBar(
           key: _bottomNavigationKey,
           currentIndex: provider.currentIndex,
-          type: BottomNavigationBarType.fixed,
+          type: BottomNavigationBarType.shifting,
           elevation: 4,
           items: _buildBottomIcon(),
           onTap: (int index) {
@@ -71,6 +75,7 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+
   }
 
   ListView homePage() {

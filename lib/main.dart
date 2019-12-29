@@ -7,18 +7,18 @@ import 'package:ifood_flutter/providers/counter.provider.dart';
 import 'package:provider/provider.dart';
 
 final List<CardImageItem> banners = [
-  CardImageItem(image: 'assets/images/restaurantes-0.png', text: 'Confira sua entrega grátis na sacola'),
-  CardImageItem(image: 'assets/images/restaurantes-1.png', text: 'A taxa é corterisa para voce'),
-  CardImageItem(image: 'assets/images/restaurantes-2.png', text: 'Comida gostosa e sem taxas'),
-  CardImageItem(image: 'assets/images/retirar.png', text: 'Peça e retira no restaurante'),
+  CardImageItem(image: 'assets/images/camarao-vermelho.jpg', text: 'Confira sua entrega grátis na sacola'),
+  CardImageItem(image: 'assets/images/ostra.jpg', text: 'A taxa é corterisa para voce'),
+  CardImageItem(image: 'assets/images/salmao.jpg', text: 'Faça seu prato em casa'),
+  CardImageItem(image: 'assets/images/lagosta.jpg', text: 'Peça e receba em casa'),
 ];
 
 final List<CardImageItem> categories = [
-  CardImageItem(image: 'assets/images/pizza.png', text: 'Pizza'),
-  CardImageItem(image: 'assets/images/lanches.png', text: 'Lanches'),
-  CardImageItem(image: 'assets/images/acai.png', text: 'Açai'),
-  CardImageItem(image: 'assets/images/japonesa.png', text: 'Japonesa'),
-  CardImageItem(image: 'assets/images/bebidas.png', text: 'Bebidas'),
+  CardImageItem(image: 'assets/images/camarao-vermelho.jpg', text: 'Camarão'),
+  CardImageItem(image: 'assets/images/lagosta.jpg', text: 'Lagosta'),
+  CardImageItem(image: 'assets/images/ostra.jpg', text: 'Ostra'),
+  CardImageItem(image: 'assets/images/salmao.jpg', text: 'Peixe'),
+  CardImageItem(image: 'assets/images/arraia.jpg', text: 'Arraia'),
 ];
 
 final List<BottomNavigatorItem> menus = [
@@ -30,7 +30,8 @@ final List<BottomNavigatorItem> menus = [
 
 void main() {
   SystemChrome.setEnabledSystemUIOverlays([]);
-  runApp(MultiProvider(
+  runApp(
+    MultiProvider(
       providers: [
       ChangeNotifierProvider(create: (_) => Counter()),
       ChangeNotifierProvider(create: (_) => BottomNavigationBarProvider()),

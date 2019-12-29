@@ -9,7 +9,7 @@ class GourmetRestaurants extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4),
         child: Image.asset(
-          'assets/images/gourmet.png',
+          'assets/images/promocao.jpg',
           fit: BoxFit.fill,
         ),
       ),
