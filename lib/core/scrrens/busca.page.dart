@@ -18,6 +18,7 @@ class _BuscaPageState extends State<BuscaPage> {
     SearchBar searchBar;
     BottomNavigationBarProvider provider;
     final myController = TextEditingController();
+    final focus = FocusNode();
 
   void _incrementCounter() {
     setState(() {

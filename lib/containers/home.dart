@@ -31,17 +31,18 @@ class _HomeState extends State<Home> {
   final BuscaPage _buscaPage = BuscaPage();
   BottomNavigationBarProvider provider;
   List<Estabelecimento> estabelecimentos = [
-    new Estabelecimento("Casa do peixe",10, 50),
+    new Estabelecimento("Casa do peixe", 10, 50),
     new Estabelecimento("Casa da lagosta", 15, 60),
-    new Estabelecimento("Casa do camarão", 20,  40)
+    new Estabelecimento("Casa do camarão", 20, 40)
   ];
   List<Estabelecimento> estabelecimentosEncontrados = [];
 
-@override
+  @override
   void initState() {
     estabelecimentosEncontrados = estabelecimentos;
     super.initState();
   }
+
   List<BottomNavigationBarItem> _buildBottomIcon() => widget.menus
       .map((menu) => BottomNavigationBarItem(
             icon: Icon(menu.icon, color: Colors.black),
@@ -51,26 +52,31 @@ class _HomeState extends State<Home> {
 
   @override
   void didChangeDependencies() {
-    if (this.provider != null && provider.currentIndex == 0 && provider.pesquisaModel.value != null) {
-      var localEncontrado = this.estabelecimentos.firstWhere((item) => item.nome.toLowerCase().contains(provider.pesquisaModel.value.toLowerCase().trim()), orElse: () => null);
+    if (this.provider != null &&
+        provider.currentIndex == 0 &&
+        provider.pesquisaModel != null) {
+      var localEncontrado = this.estabelecimentos.firstWhere(
+          (item) => item.nome
+              .toLowerCase()
+              .contains(provider.pesquisaModel.value.toLowerCase().trim()),
+          orElse: () => null);
 
-      if(localEncontrado == null){
+      if (localEncontrado == null) {
         this.estabelecimentosEncontrados = estabelecimentos;
         provider.search = true;
-
-      }else{
-      this.estabelecimentosEncontrados = [];
-      this.estabelecimentosEncontrados.add(localEncontrado);
+      } else {
+        this.estabelecimentosEncontrados = [];
+        this.estabelecimentosEncontrados.add(localEncontrado);
         provider.search = false;
-
       }
       print(localEncontrado.toString());
     }
     super.didChangeDependencies();
   }
+
   @override
   Widget build(context) {
-  this.provider = Provider.of<BottomNavigationBarProvider>(context);
+    this.provider = Provider.of<BottomNavigationBarProvider>(context);
 
     Widget _paginaSelecionada(int page) {
       switch (page) {
@@ -131,7 +137,7 @@ class _HomeState extends State<Home> {
               top: 0,
               left: 80,
               child: Padding(
-                padding: EdgeInsets.only(left: 10.0,top: 5.0),
+                padding: EdgeInsets.only(left: 10.0, top: 5.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -141,11 +147,11 @@ class _HomeState extends State<Home> {
                           fontSize: 22.0, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "Distância - ${estabelecimentosEncontrados[index].distancia ?? 0}",
+                      "Distância - ${estabelecimentosEncontrados[index].distancia ?? 0} km",
                       style: TextStyle(fontSize: 18.0),
                     ),
                     Text(
-                      "Tempo médio - ${estabelecimentosEncontrados[index].tempoMedio ?? 0}",
+                      "Tempo médio - ${estabelecimentosEncontrados[index].tempoMedio ?? 0} min",
                       style: TextStyle(fontSize: 18.0),
                     ),
                   ],
@@ -169,31 +175,92 @@ class _HomeState extends State<Home> {
       },
     );
   }
-
+      Future<void>_refreshScreen() async {
+        this.estabelecimentosEncontrados = estabelecimentos;
+        provider.search = true;
+        provider.pesquisaModel = null;
+        print("ok");
+    }
   Widget homePage() {
-    return ListView(
-      scrollDirection: Axis.vertical,
-       shrinkWrap: true,
-      children: <Widget>[
-        Visibility(child: Location() ,visible: provider.search),
-        Search(),
-        Visibility(child:BannerSlide(items: widget.banners), visible: provider.search),
-        Visibility(child:Categories(items: widget.categories),visible: provider.search),
-        Visibility(child:GourmetRestaurants(),visible: provider.search),
-        Visibility(child:SizedBox(height: 10.0,),visible: provider.search),
-        ConstrainedBox(
-            constraints: BoxConstraints(maxHeight: 350),
-            child: ListView.builder(
-              padding: EdgeInsets.only(
-              top: 20.0, left: 10.0, right: 10.0, bottom: 10.0),
-              itemCount: this.estabelecimentosEncontrados.length,
-              itemBuilder: (context, index) {
-                return _builderCard(index, context);
-              },
-            )),
-        SizedBox(height: 20.0,),
+    return RefreshIndicator(
+      onRefresh: _refreshScreen,
+              child: ListView(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              children: <Widget>[
+                Visibility(
+                  visible: true,
+                  child: Selector<BottomNavigationBarProvider, bool>(
+                      selector: (context, search) => search.search,
+                      builder: (context, search, child) {
+                        return _showWidget(search);
+                      }),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+              ],
+            ),
+          );
+        }
+      
+        Widget _showWidget(search) {
+          if (search == true) {
+            return Column(
+              children: <Widget>[
+                Visibility(child: Location(), visible: provider.search),
+                Search(),
+                Visibility(
+                    child: BannerSlide(items: widget.banners),
+                    visible: provider.search),
+                Visibility(
+                    child: Categories(items: widget.categories),
+                    visible: provider.search),
+                Visibility(child: GourmetRestaurants(), visible: provider.search),
+                Visibility(
+                    child: SizedBox(
+                      height: 10.0,
+                    ),
+                    visible: provider.search),
+                    ConstrainedBox(
+                constraints: BoxConstraints(maxHeight: 350),
+                child: ListView.builder(
+                  padding: EdgeInsets.only(
+                      top: 20.0, left: 10.0, right: 10.0, bottom: 10.0),
+                  itemCount: this.estabelecimentosEncontrados.length,
+                  itemBuilder: (context, index) {
+                    return _builderCard(index, context);
+                  },
+                ))
+              ],
+            );
+          }
+      
+          if (search == false) {
+            return Column(
+              children: <Widget>[
+                Search(),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxHeight: 350),
+                  child: RefreshIndicator(
+                  onRefresh: _refreshScreen,
 
-      ],
-    );
-  }
-}
+                      child: ListView.builder(
+                      padding: EdgeInsets.only(
+                          top: 20.0, left: 10.0, right: 10.0, bottom: 10.0),
+                      itemCount: this.estabelecimentosEncontrados.length,
+                      itemBuilder: (context, index) {
+                        return _builderCard(index, context);
+                      },
+                    ),
+                  )),
+      
+              ],
+      
+            );
+          }
+          return null;
+        }
+      }
+      
+
