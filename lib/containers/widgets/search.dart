@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 class Search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
  var provider = Provider.of<BottomNavigationBarProvider>(context);
 
     return Container(
@@ -22,8 +23,7 @@ class Search extends StatelessWidget {
                 child: FocusScope(
                      child: Focus(
                       onFocusChange: (focus)  {
-                        print(provider.pesquisaModel.toString());
-                        //provider.currentIndex = 1;
+                        provider.currentIndex = 1;
                         },
                       child: TextField(
                     decoration: InputDecoration(

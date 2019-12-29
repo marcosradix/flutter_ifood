@@ -17,6 +17,7 @@ class _BuscaPageState extends State<BuscaPage> {
     String pesquisa = "";
     SearchBar searchBar;
     BottomNavigationBarProvider provider;
+    final myController = TextEditingController();
 
   void _incrementCounter() {
     setState(() {
@@ -39,16 +40,16 @@ class _BuscaPageState extends State<BuscaPage> {
  @override
   void initState() {
     searchBar =  SearchBar(
-        inBar: false,
+        inBar: true,
         hintText: "Pesquisar item",
         buildDefaultAppBar: buildAppBar,
         setState: setState,
+        controller: myController,
         onSubmitted: onSubmitted);
     super.initState();
   }
 
     AppBar buildAppBar(BuildContext context) {
-    this.provider = Provider.of<BottomNavigationBarProvider>(context);
     return AppBar(
       title: Text("IFish"),
       actions: [
@@ -58,6 +59,7 @@ class _BuscaPageState extends State<BuscaPage> {
   }
   @override
   Widget build(BuildContext context) {
+    this.provider = Provider.of<BottomNavigationBarProvider>(context);
 
       return Scaffold(
       key: _scaffoldKey,
