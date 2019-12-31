@@ -29,7 +29,6 @@ final List<BottomNavigatorItem> menus = [
 ];
 
 void main() {
-  SystemChrome.setEnabledSystemUIOverlays([]);
   runApp(
     MultiProvider(
       providers: [
@@ -38,4 +37,6 @@ void main() {
       ],
     child: Home(menus: menus, categories: categories, banners: banners)
     ));
+
+
 }

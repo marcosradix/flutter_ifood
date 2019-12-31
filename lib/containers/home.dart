@@ -52,14 +52,10 @@ class _HomeState extends State<Home> {
 
   @override
   void didChangeDependencies() {
-    if (this.provider != null &&
-        provider.currentIndex == 0 &&
-        provider.pesquisaModel != null) {
+    if (this.provider != null && provider.currentIndex == 0 && provider.pesquisaModel?.value != null) {
       var localEncontrado = this.estabelecimentos.firstWhere(
-          (item) => item.nome
-              .toLowerCase()
-              .contains(provider.pesquisaModel.value.toLowerCase().trim()),
-          orElse: () => null);
+          (item) => item.nome.toLowerCase().contains(provider.pesquisaModel.value.toLowerCase().trim()),
+          orElse : () => null);
 
       if (localEncontrado == null) {
         this.estabelecimentosEncontrados = estabelecimentos;
@@ -101,19 +97,19 @@ class _HomeState extends State<Home> {
       ),
       title: 'IFISH',
       home: Scaffold(
-        backgroundColor: Colors.blueAccent,
-        body: _paginaSelecionada(provider.currentIndex),
-        bottomNavigationBar: BottomNavigationBar(
-          key: _bottomNavigationKey,
-          currentIndex: provider.currentIndex,
-          type: BottomNavigationBarType.shifting,
-          elevation: 4,
-          items: _buildBottomIcon(),
-          onTap: (int index) {
-            provider.currentIndex = index;
-          },
-        ),
-      ),
+            backgroundColor: Colors.blueAccent,
+            body: _paginaSelecionada(provider.currentIndex),
+            bottomNavigationBar: BottomNavigationBar(
+              key: _bottomNavigationKey,
+              currentIndex: provider.currentIndex,
+              type: BottomNavigationBarType.shifting,
+              elevation: 4,
+              items: _buildBottomIcon(),
+              onTap: (int index) {
+                provider.currentIndex = index;
+              },
+            ),
+          ),
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:ifood_flutter/core/model/pesquisa.model.dart';
 import 'package:ifood_flutter/providers/bottomNavigationBar.provider.dart';
 import 'package:provider/provider.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 
 class BuscaPage extends StatefulWidget {
@@ -53,6 +54,8 @@ class _BuscaPageState extends State<BuscaPage> {
     AppBar buildAppBar(BuildContext context) {
     return AppBar(
       title: Text("IFish"),
+      backgroundColor: Colors.blueAccent,
+      brightness: Brightness.dark,
       actions: [
         searchBar.getSearchAction(context)
       ],
@@ -80,10 +83,15 @@ class _BuscaPageState extends State<BuscaPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: SizedBox(
+        width: 300,
+          child: FloatingActionButton.extended(
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          label: Text("Adicionar a cesta"),
+          icon: Icon(MdiIcons.basket),
+          backgroundColor: Colors.blueGrey,
+        ),
       ), 
     );
   }
